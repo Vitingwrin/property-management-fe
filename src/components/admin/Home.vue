@@ -2,11 +2,8 @@
   <el-container style="min-width: 1350px">
 
     <!--顶栏-->
-    <el-header height="5vh" align="right">
-      <a class="brand" href="#">招聘后台管理</a>
-      <!--<el-input class="search-bar" type="text" placeholder="搜索...">-->
-        <!--<template slot="prefix"><fa style="margin-left: .3rem" icon="search"></fa></template>-->
-      <!--</el-input>-->
+    <el-header height="5vh" style="text-align: right">
+      <a class="brand" href="#">物业管理系统后台</a>
       <div class="right-header">
         <el-dropdown style="margin-right: 10vw" @command="handleCommand">
           <span class="dropdown">
@@ -25,49 +22,53 @@
 
       <!--侧栏-->
       <el-aside style="text-align: center" width="auto">
-        <el-menu :default-active="currentMenu" :collapse="collapse" @open="handleOpen" @close="handleClose"
-                 background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" router
-                 @mouseenter.native="showSideBar" @mouseleave.native="hideSideBar" class="menu">
+        <el-menu :default-active="currentMenu" router class="menu">
           <el-submenu index="1" style="margin-top: 30px">
-            <template slot="title"><fa icon="file-alt" :style="gutter"></fa><span>新闻管理&emsp;&emsp;</span></template>
-            <el-menu-item index="/admin/news/publish">添加&emsp;</el-menu-item>
-            <el-menu-item index="/admin/news/published">已发布</el-menu-item>
-            <el-menu-item index="/admin/news/trash">回收站</el-menu-item>
+            <template slot="title"><fa icon="file-alt" :style="gutter"></fa><span>小区管理</span></template>
+            <el-menu-item index="/admin/residence/add">添加</el-menu-item>
+            <el-menu-item index="/admin/residence/manage">管理</el-menu-item>
           </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>职位管理&emsp;&emsp;</span></template>
-            <el-menu-item index="/admin/job/add">添加</el-menu-item>
-            <el-menu-item index="/admin/job/manage">管理</el-menu-item>
+          <el-submenu index="7">
+            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>用户管理</span></template>
+            <el-menu-item index="/admin/user/add">添加</el-menu-item>
+            <el-menu-item index="/admin/user/manage">管理</el-menu-item>
+          </el-submenu>
+          <el-submenu index="2">
+            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>房产管理</span></template>
+            <el-menu-item index="/admin/property/add">添加</el-menu-item>
+            <el-menu-item index="/admin/property/manage">管理</el-menu-item>
+            <el-menu-item index="/admin/property/checkIn">入住</el-menu-item>
+          </el-submenu>
+          <el-menu-item index="/admin/repair/manage">
+            <fa icon="tags" :style="gutter"></fa><span slot="title">报修管理</span>
+          </el-menu-item>
+          <el-submenu index="4">
+            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>费用管理</span></template>
+            <el-menu-item index="/admin/bill/add">新增缴费单</el-menu-item>
+            <el-menu-item index="/admin/bill/manage">管理缴费单</el-menu-item>
           </el-submenu>
           <el-submenu index="5">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>系统用户管理</span></template>
+            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>投诉建议</span></template>
             <el-menu-item index="/admin/user/add">添加用户</el-menu-item>
             <el-menu-item index="/admin/user/pwd">修改密码</el-menu-item>
             <el-menu-item index="/admin/user/manage">用户查看</el-menu-item>
           </el-submenu>
-          <el-menu-item index="/admin/company/manage">
-            <fa icon="tags" :style="gutter"></fa><span slot="title">企业信息管理</span>
-          </el-menu-item>
-          <el-menu-item index="/admin/jobResume/manage">
-            <fa icon="tags" :style="gutter"></fa><span slot="title">应聘信息管理</span>
-          </el-menu-item>
-          <el-menu-item index="0" class="lock">
-            <div @mousedown="clicking=!clicking" @mouseup="clicking=!clicking" @click.stop="lock">
-              <fa :style="lockStyle" :icon="lockIcon"></fa>
-            </div>
-          </el-menu-item>
+          <el-submenu index="6">
+            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>公告留言</span></template>
+            <el-menu-item index="/admin/user/add">添加用户</el-menu-item>
+            <el-menu-item index="/admin/user/pwd">修改密码</el-menu-item>
+            <el-menu-item index="/admin/user/manage">用户查看</el-menu-item>
+          </el-submenu>
         </el-menu>
       </el-aside>
 
       <!--内容-->
       <el-main>
-        <el-card style="height: 85vh; width: 94%; margin-left: 3%; margin-top: 1%">
-        <el-scrollbar style="height: 80vh">
+        <el-scrollbar style="height: 80vh; margin-top: 30px">
           <div style="margin-right: 10px; margin-left: 10px">
           <router-view></router-view>
           </div>
         </el-scrollbar>
-        </el-card>
       </el-main>
     </el-container>
   </el-container>
@@ -78,8 +79,6 @@
     name: "Home",
     data() {
       return {
-        collapse: false,
-        locked: true,
         clicking: false,
         currentMenu: '/admin/news/publish'
       }
@@ -95,14 +94,6 @@
     computed: {
       gutter: function() {
         return { "margin-right": this.collapse ? "0" : "1rem" }
-      },
-      lockIcon: function() {
-        return this.locked ? "lock" : "lock-open";
-      },
-      lockStyle: function() {
-        const style = { transition: "color .2s" };
-        style.color = this.clicking ? "#ffd04b" : "#aaaaaa";
-        return style;
       }
     },
     methods: {
@@ -120,21 +111,6 @@
       changeMenuFromUrl: function(url) {
         url = url.substr(url.indexOf('//') + 2);
         this.currentMenu = url.substr(url.indexOf('/'));
-      },
-      handleOpen(key, keyPath) {
-        console.log(key + '   ' + keyPath);
-      },
-      handleClose(key, keyPath) {
-
-      },
-      showSideBar() {
-        this.collapse = false;
-      },
-      hideSideBar() {
-        this.collapse = !this.locked;
-      },
-      lock() {
-        this.locked = !this.locked;
       }
     }
   }
@@ -142,7 +118,7 @@
 
 <style scoped>
   .el-header {
-    background-color: #3c3f41;
+    background-color: #8cc4fd;
     color: #333;
     display: flex;
     padding: 0;
@@ -153,7 +129,7 @@
     cursor: pointer;
     width: 100%;
   }
-  
+
   .dropdown:hover {
     color: #5cb6ff;
     transition: color .15s linear;
@@ -161,24 +137,7 @@
 
   .menu {
     min-height: 95vh;
-  }
-
-  .menu:not(.el-menu--collapse) {
     width: 20vw;
-  }
-
-  .lock {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .lock > div {
-    margin-left: -20px;   /*抵消父元素*/
-    margin-right: -20px;  /*抵消父元素*/
-    width: inherit;
-    height: inherit;
   }
 
   .brand {
@@ -192,13 +151,10 @@
 
   .right-header {
     width: 80vw;
-    background-color: #3c3f41;
+    background-color: #8cc4fd;
     line-height: 5vh;
   }
 
-  .search-bar {
-    width: 80vw;
-  }
 
 </style>
 <style>

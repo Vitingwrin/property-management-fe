@@ -64,6 +64,16 @@ router.beforeEach((to, from, next) => {
         Vue.prototype.$message.error("权限不足，请登录管理员权限账号");
         next({path: '/login', query: {redirect: to.path}});
       }
+      return;
+    } else if (to.meta.requireSuper) {
+      // 判断权限
+      if (store.getters.isSuper) {
+        next();
+      } else {
+        Vue.prototype.$message.error("权限不足，请登录超级管理员权限账号");
+        next({path: '/login', query: {redirect: to.path}});
+      }
+      return;
     }
     next();
   }

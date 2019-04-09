@@ -37,7 +37,7 @@
   import * as qs from 'querystring'
 
   export default {
-    name: "UserPwd",
+    name: "Password",
     data() {
       const validateOldPwd = async (rule,  value,  callback) => {
         if ('' === value) {
@@ -76,7 +76,7 @@
       return {
         loading: false,
         pwdForm: {
-          username: '',
+          username: this.$store.state.user.username,
           oldPwd: '',
           newPwd: '',
           newPwd2: ''

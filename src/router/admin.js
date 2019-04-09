@@ -1,51 +1,84 @@
 import Home from '@/components/admin/Home'
-import Publish from '@/components/admin/news/Publish'
-import UserAdd from '@/components/admin/user/UserAdd'
-import UserPwd from '@/components/admin/user/UserPwd'
-import Published from '@/components/admin/news/Published'
-import Trash from '@/components/admin/news/Trash'
-import UserManage from '@/components/admin/user/UserManage'
-import Manage from '@/components/admin/company/Manage'
-import JobAdd from '@/components/admin/job/JobAdd'
-import JobManage from '@/components/admin/job/JobManage'
-import JobResumeManage from '@/components/admin/jobResume/Manage'
+import Login from '@/components/admin/Login'
+import ResidenceAdd from '@/components/admin/residence/Add'
+import ResidenceManage from '@/components/admin/residence/Manage'
+import PropertyAdd from '@/components/admin/property/Add'
+import PropertyManage from '@/components/admin/property/Manage'
+import CheckIn from '@/components/admin/property/CheckIn'
+import UserAdd from '@/components/admin/user/Add'
+import UserManage from '@/components/admin/user/Manage'
+import BillAdd from '@/components/admin/bill/Add'
 
 export default [
   {
     path: '/admin',
-    redirect: '/admin/news'
+    redirect: '/admin/residence'
   },
   {
-    path: '/admin/news',
+    path: '/admin/login',
+    component: Login,
+    name: 'adminLogin'
+  },
+  {
+    path: '/admin/residence',
     name: 'home',
-    redirect: '/admin/news/publish',
+    redirect: '/admin/residence/add',
     component: Home,
     meta: {
       requireAdmin: true
     },
     children: [
       {
-        path: 'publish',
-        component: Publish,
+        path: 'add',
+        component: ResidenceAdd,
         meta: {
           requireAdmin: true
         },
-        name: 'publish',
+        name: 'residenceAdd',
         props: {}
       },
       {
-        path: 'published',
+        path: 'manage',
+        component: ResidenceManage,
         meta: {
           requireAdmin: true
         },
-        component: Published
+        name: 'residenceManage'
+      }
+    ]
+  },
+  {
+    path: '/admin/property',
+    component: Home,
+    redirect: '/admin/property/add',
+    meta: {
+      requireAdmin: true
+    },
+    children: [
+      {
+        path: 'add',
+        props: [],
+        name: 'propertyAdd',
+        meta: {
+          requireAdmin: true
+        },
+        component: PropertyAdd
       },
       {
-        path: 'trash',
+        path: 'manage',
+        component: PropertyManage,
         meta: {
           requireAdmin: true
         },
-        component: Trash
+        name: 'propertyManage'
+      },
+      {
+        path: 'checkIn',
+        component: CheckIn,
+        meta: {
+          requireAdmin: true
+        },
+        name: 'checkIn'
       }
     ]
   },
@@ -59,86 +92,40 @@ export default [
     children: [
       {
         path: 'add',
+        props: [],
+        name: 'userAdd',
         meta: {
           requireAdmin: true
         },
         component: UserAdd
       },
       {
-        path: 'pwd',
-        name: 'adminPwd',
-        meta: {
-          requireAdmin: true
-        },
-        component: UserPwd
-      },
-      {
         path: 'manage',
+        component: UserManage,
         meta: {
           requireAdmin: true
         },
-        component: UserManage
+        name: 'userManage'
       }
     ]
   },
   {
-    path: '/admin/company',
+    path: '/admin/bill',
     component: Home,
-    redirect: '/admin/company/manage',
-    meta: {
-      requireAdmin: true
-    },
-    children: [
-      {
-        path: 'manage',
-        meta: {
-          requireAdmin: true
-        },
-        component: Manage
-      }
-    ]
-  },
-  {
-    path: '/admin/job',
-    component: Home,
-    redirect: '/admin/job/add',
+    redirect: '/admin/bill/add',
     meta: {
       requireAdmin: true
     },
     children: [
       {
         path: 'add',
-        name: 'jobAdd',
-        props: {},
+        props: [],
+        name: 'billAdd',
         meta: {
           requireAdmin: true
         },
-        component: JobAdd
+        component: BillAdd
       },
-      {
-        path: 'manage',
-        meta: {
-          requireAdmin: true
-        },
-        component: JobManage
-      }
-    ]
-  },
-  {
-    path: '/admin/jobResume',
-    component: Home,
-    redirect: '/admin/jobResume/manage',
-    meta: {
-      requireAdmin: true
-    },
-    children: [
-      {
-        path: 'manage',
-        meta: {
-          requireAdmin: true
-        },
-        component: JobResumeManage
-      }
     ]
   }
 ]

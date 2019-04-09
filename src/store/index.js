@@ -27,6 +27,14 @@ export default new Vuex.Store({
         }
       }
       return false;
+    },
+    isSuper: state => {
+      for (let auth of state.user.authorities) {
+        if (auth.authority === 'super') {
+          return true;
+        }
+      }
+      return false;
     }
   },
   mutations: {
