@@ -28,6 +28,8 @@
       const validateCode = async (rule, value, callback) => {
         if (value === undefined || '' === value) {
           callback(new Error('请填写小区编码'));
+        } else if (value === this.$route.params.code) {
+          callback();
         } else {
           await axios.get('/residence/checkCodeUnique', {params: {code: value}})
             .then(response => {

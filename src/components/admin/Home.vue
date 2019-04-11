@@ -55,9 +55,8 @@
           </el-submenu>
           <el-submenu index="6">
             <template slot="title"><fa icon="tags" :style="gutter"></fa><span>公告留言</span></template>
-            <el-menu-item index="/admin/user/add">添加用户</el-menu-item>
-            <el-menu-item index="/admin/user/pwd">修改密码</el-menu-item>
-            <el-menu-item index="/admin/user/manage">用户查看</el-menu-item>
+            <el-menu-item index="/admin/notice/add">发布公告</el-menu-item>
+            <el-menu-item index="/admin/notice/manage">公告管理</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>

@@ -137,4 +137,7 @@
   .el-scrollbar__wrap {
     overflow-x: hidden !important;
   }
+  .el-select-dropdown__wrap {
+    overflow-x: scroll !important;
+  }
 </style>

@@ -7,27 +7,28 @@ import 'element-ui/lib/theme-chalk/index.css'
 import store from './store/index'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLock, faFileAlt, faTags, faLockOpen, faSearch, faAt } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLock, faFileAlt, faTags, faWrench, faClipboard, faKey,
+  faLockOpen, faSearch, faAt, faBuilding, faBookmark, faDollarSign }
+  from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import 'font-awesome/css/font-awesome.min.css'
 import axios from 'axios'
-import mavonEditor from 'mavon-editor'
-
-import 'mavon-editor/dist/css/index.css'
 
 Vue.component('fa', FontAwesomeIcon);
-library.add(faUser, faLock, faFileAlt, faTags, faLockOpen, faSearch, faAt);
+library.add(faUser, faLock, faFileAlt, faTags, faClipboard, faKey, faDollarSign,
+  faLockOpen, faSearch, faAt, faBuilding, faWrench, faBookmark);
+
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
 import ElementUI from 'element-ui'
 Vue.use(ElementUI);
-// Vue.use(mavonEditor);
-Vue.use(mavonEditor)
+Vue.use(MintUI)
 
 Vue.config.productionTip = false;
 
 // axios配置
-axios.defaults.baseURL = 'http://localhost:8080'; //开发
-// axios.defaults.baseURL = 'http://120.79.93.191:8080'; //生产
+axios.defaults.baseURL = 'http://localhost:8080';
 axios.defaults.withCredentials = true;
 
 Vue.prototype.arrayCopy = items => {
@@ -62,7 +63,7 @@ router.beforeEach((to, from, next) => {
         next();
       } else {
         Vue.prototype.$message.error("权限不足，请登录管理员权限账号");
-        next({path: '/login', query: {redirect: to.path}});
+        next({path: '/admin/login', query: {redirect: to.path}});
       }
       return;
     } else if (to.meta.requireSuper) {
@@ -71,7 +72,7 @@ router.beforeEach((to, from, next) => {
         next();
       } else {
         Vue.prototype.$message.error("权限不足，请登录超级管理员权限账号");
-        next({path: '/login', query: {redirect: to.path}});
+        next({path: '/admin/login', query: {redirect: to.path}});
       }
       return;
     }

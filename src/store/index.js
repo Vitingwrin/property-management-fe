@@ -11,12 +11,14 @@ const storage = new function () {
 
 export default new Vuex.Store({
   state: {
-    user: {name: '未登录'}
+    user: {name: '未登录'},
+    property: {}
   },
   getters: {
     isLogin: state => {
       if (state.user == null || state.user.name === '未登录' || state.user.name === '') {
         state.user = JSON.parse(storage.get("user"));
+        state.property = JSON.parse(storage.get("property"));
       }
       return state.user != null && state.user.name !== '未登录' && state.user.name !== '';
     },
@@ -46,6 +48,11 @@ export default new Vuex.Store({
       state.user = {name: '未登录'};
       storage.set("user", JSON.stringify(state.user));
       storage.remove("user");
+      storage.remove("property");
+    },
+    saveProperty(state, property) {
+      state.property = property;
+      storage.set("property", JSON.stringify(property));
     }
   }
 });

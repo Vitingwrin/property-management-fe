@@ -52,7 +52,9 @@
       const validateCode = async (rule, value, callback) => {
         if (value === undefined || '' === value) {
           callback(new Error('请填写房产编码'));
-        } else {
+        }else if (value === this.$route.params.code) {
+          callback();
+        }  else {
           await axios.get('/property/checkCodeUnique', {params: {code: value}})
             .then(response => {
               response.data.status === 200 ? callback() : callback(new Error(response.data.message));

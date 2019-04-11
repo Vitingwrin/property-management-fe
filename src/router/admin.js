@@ -8,6 +8,9 @@ import CheckIn from '@/components/admin/property/CheckIn'
 import UserAdd from '@/components/admin/user/Add'
 import UserManage from '@/components/admin/user/Manage'
 import BillAdd from '@/components/admin/bill/Add'
+import BillManage from '@/components/admin/bill/Manage'
+import NoticeAdd from '@/components/admin/notice/Add'
+import NoticeManage from '@/components/admin/notice/Manage'
 
 export default [
   {
@@ -126,6 +129,43 @@ export default [
         },
         component: BillAdd
       },
+      {
+        path: 'manage',
+        props: [],
+        name: 'billManage',
+        meta: {
+          requireAdmin: true
+        },
+        component: BillManage
+      }
+    ]
+  },
+  {
+    path: '/admin/notice',
+    component: Home,
+    redirect: '/admin/notice/add',
+    meta: {
+      requireAdmin: true
+    },
+    children: [
+      {
+        path: 'add',
+        props: [],
+        name: 'noticeAdd',
+        meta: {
+          requireAdmin: true
+        },
+        component: NoticeAdd
+      },
+      {
+        path: 'manage',
+        props: [],
+        name: 'noticeManage',
+        meta: {
+          requireAdmin: true
+        },
+        component: NoticeManage
+      }
     ]
   }
 ]
