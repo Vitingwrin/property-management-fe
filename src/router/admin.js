@@ -11,6 +11,8 @@ import BillAdd from '@/components/admin/bill/Add'
 import BillManage from '@/components/admin/bill/Manage'
 import NoticeAdd from '@/components/admin/notice/Add'
 import NoticeManage from '@/components/admin/notice/Manage'
+import ComplaintManage from '@/components/admin/complaint/Manage'
+import RepairManage from '@/components/admin/repair/Manage'
 
 export default [
   {
@@ -167,5 +169,35 @@ export default [
         component: NoticeManage
       }
     ]
+  },
+  {
+    path: '/admin/complaint',
+    component: Home,
+    redirect: '/admin/complaint/manage',
+    meta: {
+      requireAdmin: true
+    },
+    children: [{
+      path: 'manage',
+      component: ComplaintManage,
+      meta: {
+        requireAdmin: true
+      }
+    }]
+  },
+  {
+    path: '/admin/repair',
+    component: Home,
+    redirect: '/admin/repair/manage',
+    meta: {
+      requireAdmin: true
+    },
+    children: [{
+      path: 'manage',
+      component: RepairManage,
+      meta: {
+        requireAdmin: true
+      }
+    }]
   }
 ]

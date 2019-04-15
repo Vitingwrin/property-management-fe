@@ -3,7 +3,7 @@
     <div style="background: #f5f5f5; height: 100vh;">
       <mt-header fixed title="我的缴费">
         <mt-button icon="back" slot="left" @click="$router.go(-1)">返回</mt-button>
-        <mt-button icon="more" slot="right"></mt-button>
+        <mt-button slot="right" @click.prevent="feLogout"><fa icon="sign-out-alt"></fa></mt-button>
       </mt-header>
       <div class="top-card"></div>
       <el-card v-loading="backlogLoading" class="fe-card" shadow="never" header="待缴费">

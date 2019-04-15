@@ -1,6 +1,17 @@
 <template>
   <div style="height: 100%">
     <el-table :data="displayData" v-loading="loading">
+      <el-table-column type="expand">
+        <template slot-scope="scope">
+          <p v-show="scope.row.messages.length === 0">暂无评论</p>
+          <el-form v-for="comment in scope.row.messages" :key="comment.id" label-position="left" label-width="150px">
+            <el-form-item :label="comment.creator">
+              <span style="float: left">{{comment.content}}</span>
+              <span style="float: right">{{comment.createTime}}</span>
+            </el-form-item>
+          </el-form>
+        </template>
+      </el-table-column>
       <el-table-column align="center" label="标题" prop="title" />
       <el-table-column align="center" width="250" label="内容" prop="content" />
       <el-table-column align="center" label="发布人" prop="creator" />

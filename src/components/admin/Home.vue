@@ -24,37 +24,34 @@
       <el-aside style="text-align: center" width="auto">
         <el-menu :default-active="currentMenu" router class="menu">
           <el-submenu index="1" style="margin-top: 30px">
-            <template slot="title"><fa icon="file-alt" :style="gutter"></fa><span>小区管理</span></template>
+            <template slot="title"><span>小区管理</span></template>
             <el-menu-item index="/admin/residence/add">添加</el-menu-item>
             <el-menu-item index="/admin/residence/manage">管理</el-menu-item>
           </el-submenu>
           <el-submenu index="7">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>用户管理</span></template>
+            <template slot="title"><span>用户管理</span></template>
             <el-menu-item index="/admin/user/add">添加</el-menu-item>
             <el-menu-item index="/admin/user/manage">管理</el-menu-item>
           </el-submenu>
           <el-submenu index="2">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>房产管理</span></template>
+            <template slot="title"><span>房产管理</span></template>
             <el-menu-item index="/admin/property/add">添加</el-menu-item>
             <el-menu-item index="/admin/property/manage">管理</el-menu-item>
             <el-menu-item index="/admin/property/checkIn">入住</el-menu-item>
           </el-submenu>
           <el-menu-item index="/admin/repair/manage">
-            <fa icon="tags" :style="gutter"></fa><span slot="title">报修管理</span>
+            <span slot="title">报修管理</span>
           </el-menu-item>
           <el-submenu index="4">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>费用管理</span></template>
+            <template slot="title"><span>费用管理</span></template>
             <el-menu-item index="/admin/bill/add">新增缴费单</el-menu-item>
             <el-menu-item index="/admin/bill/manage">管理缴费单</el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>投诉建议</span></template>
-            <el-menu-item index="/admin/user/add">添加用户</el-menu-item>
-            <el-menu-item index="/admin/user/pwd">修改密码</el-menu-item>
-            <el-menu-item index="/admin/user/manage">用户查看</el-menu-item>
-          </el-submenu>
+          <el-menu-item index="/admin/complaint/manage">
+            <span slot="title">投诉建议</span>
+          </el-menu-item>
           <el-submenu index="6">
-            <template slot="title"><fa icon="tags" :style="gutter"></fa><span>公告留言</span></template>
+            <template slot="title"><span>公告留言</span></template>
             <el-menu-item index="/admin/notice/add">发布公告</el-menu-item>
             <el-menu-item index="/admin/notice/manage">公告管理</el-menu-item>
           </el-submenu>
@@ -103,7 +100,7 @@
             break;
           case 'logout':
             this.$store.commit('logout');
-            this.$router.push({name: 'login'});
+            this.$router.push({name: 'adminLogin'});
             break;
         }
       },

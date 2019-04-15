@@ -3,7 +3,7 @@
     <div style="background: #f5f5f5; height: 100vh;">
       <mt-header fixed title="修改密码">
         <mt-button icon="back" slot="left" @click="$router.go(-1)">返回</mt-button>
-        <mt-button icon="more" slot="right"></mt-button>
+        <mt-button slot="right" @click.prevent="feLogout"><fa icon="sign-out-alt"></fa></mt-button>
       </mt-header>
       <div class="top-card"></div>
       <mt-field label="原密码" placeholder="请输入原密码" type="password" v-model="pwdForm.oldPwd"></mt-field>

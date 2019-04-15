@@ -1,7 +1,7 @@
 <template>
   <div style="background: #f5f5f5; height: 100vh;">
     <mt-header fixed title="物业管理">
-      <mt-button icon="more" slot="right"></mt-button>
+      <mt-button slot="right" @click.prevent="feLogout"><fa icon="sign-out-alt"></fa></mt-button>
     </mt-header>
     <div class="top-card">
       <span>{{property.name}}</span>
@@ -17,7 +17,7 @@
     </el-card>
     <el-card v-loading="noticeLoading" class="fe-card" shadow="never" header="公告栏">
       <div v-if="notices.length > 0" v-for="notice in notices" :key="notice.id" class="card">
-        <el-button type="text" style="width: 90%">
+        <el-button type="text" style="width: 90%" @click="$router.push({name: 'noticeDetail', params: notice})">
           <span style="float: left">{{notice.title}}</span>
           <span style="float: right">{{notice.createTime}}</span>
         </el-button>
@@ -25,13 +25,13 @@
       <div v-show="notices.length === 0" class="none"><span>暂无信息</span></div>
     </el-card>
     <el-card class="fe-card flex" shadow="never">
-      <circle-button class="circle" icon="wrench" text="物业报修" @click.native="log"
+      <circle-button class="circle" icon="wrench" text="物业报修" @click.native="$router.push('/repair')"
                      bg-color="#26a2ff" icon-color="white" />
       <circle-button class="circle" icon="building" text="我的物业" @click.native="$router.push('/myProperty')"
                      bg-color="#26a2ff" icon-color="white" />
-      <circle-button class="circle" icon="clipboard" text="公告栏" @click.native="log"
+      <circle-button class="circle" icon="clipboard" text="公告栏" @click.native="$router.push('/notice')"
                      bg-color="#26a2ff" icon-color="white" />
-      <circle-button class="circle" icon="bookmark" text="投诉建议" @click.native="log"
+      <circle-button class="circle" icon="bookmark" text="投诉建议" @click.native="$router.push('/complaint')"
                      bg-color="#26a2ff" icon-color="white" />
       <circle-button class="circle" icon="dollar-sign" text="我的缴费" @click.native="$router.push('/myBill')"
                      bg-color="#26a2ff" icon-color="white" />
@@ -75,13 +75,13 @@
       },
       getNotice() {
         this.noticeLoading = true;
-        axios.get('/notice/getAllNotices')
+        axios.get('/notice/getNoticesWithMsg')
           .then(response => {
             this.notices = response.data.notices;
             this.noticeLoading = false;
           }).catch(() => {
-          Toast('待办事项加载失败');
-          this.noticeLoading = false;
+            Toast('公告栏加载失败');
+            this.noticeLoading = false;
         })
       }
     },

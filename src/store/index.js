@@ -23,6 +23,9 @@ export default new Vuex.Store({
       return state.user != null && state.user.name !== '未登录' && state.user.name !== '';
     },
     isAdmin: state => {
+      if (state.user === null) {
+        return false;
+      }
       for (let auth of state.user.authorities) {
         if (auth.authority === 'admin') {
           return true;
@@ -31,6 +34,9 @@ export default new Vuex.Store({
       return false;
     },
     isSuper: state => {
+      if (state.user === null) {
+        return false;
+      }
       for (let auth of state.user.authorities) {
         if (auth.authority === 'super') {
           return true;
